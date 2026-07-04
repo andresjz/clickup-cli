@@ -2,16 +2,91 @@
 
 Tiny Python CLI for ClickUp API. Built with `uv`, `typer`, `httpx`, `rich`, `pyyaml`.
 
+Requires **Python 3.12+**.
+
+## Installation
+
+Pick the form that matches your machine.
+
+### Option 1 — `uv` (recommended)
+
+Best for both development and day-to-day use.
+
+```bash
+# install as a global tool from the public git repo
+uv tool install git+https://github.com/andresjz/clickup-cli.git
+
+# use it
+clickup-cli auth whoami
+
+# upgrade after a push
+uv tool upgrade clickup-cli
+
+# uninstall
+uv tool uninstall clickup-cli
+```
+
+If you have `uv` but want to hack on the source, clone and run editable:
+
+```bash
+git clone https://github.com/andresjz/clickup-cli.git
+cd clickup-cli
+uv sync
+uv run clickup-cli auth whoami
+```
+
+### Option 2 — `pip` only (no `uv`)
+
+Works on any machine with Python 3.12+ and `pip`.
+
+```bash
+# install as a user tool from the public git repo
+python -m pip install --user git+https://github.com/andresjz/clickup-cli.git
+
+# use it (Linux: usually ~/.local/bin/clickup-cli)
+~/.local/bin/clickup-cli auth whoami
+
+# upgrade after a push
+python -m pip install --user --upgrade git+https://github.com/andresjz/clickup-cli.git
+```
+
+Pin to a specific ref when needed:
+
+```bash
+python -m pip install --user git+https://github.com/andresjz/clickup-cli.git@main
+python -m pip install --user git+https://github.com/andresjz/clickup-cli.git@v0.1.0
+```
+
+Editable install for local hacking without `uv`:
+
+```bash
+git clone https://github.com/andresjz/clickup-cli.git
+cd clickup-cli
+python -m pip install --user -e .
+```
+
+### Option 3 — specific version in a venv
+
+```bash
+python -m venv .venv
+.venv/bin/pip install git+https://github.com/andresjz/clickup-cli.git
+.venv/bin/clickup-cli auth whoami
+```
+
+> After `--user` installs, ensure the user bin dir is on `PATH`
+> (Linux: `~/.local/bin`; macOS: same; Windows: `%APPDATA%\Python\Scripts`).
+
 ## Setup
+
+After installing, configure the token and workspace mapping:
 
 ```bash
 cp .env.example .env
 # edit .env: CLICKUP_TOKEN=pk_your_personal_api_token_here
-uv sync
 
 # Scaffold a config file with your workspace IDs
-uv run clickup-cli config init
-uv run clickup-cli config show
+clickup-cli config init
+clickup-cli config show
 ```
 
 The config file (`.clickup-cli.yaml`) maps **names → IDs** so you don't have
