@@ -1,0 +1,20 @@
+# Copy this to .clickup-cli.yaml and fill in your workspace IDs.
+# Run `clickup-cli config init` to regenerate from scratch.
+# Resolution: $CLICKUP_CONFIG > ./.clickup-cli.yaml > ~/.config/clickup-cli/config.yaml
+
+team:
+  id: "<TEAM_ID>"           # find with: clickup-cli team list
+  name: "<WORKSPACE_NAME>"
+
+defaults:
+  space: <SPACE_NAME>       # used when --space is omitted
+  folder: <FOLDER_NAME>     # used when --folder is omitted
+
+spaces:
+  <SPACE_NAME>:
+    id: "<SPACE_ID>"
+    folders:
+      <FOLDER_NAME>:
+        id: "<FOLDER_ID>"
+        lists:
+          <LIST_NAME>: "<LIST_ID>"
